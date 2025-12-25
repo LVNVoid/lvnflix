@@ -1,18 +1,22 @@
-import { getNowPlayingMovies, getPopularMovies } from '@/services/movieService';
+import {
+  getNowPlayingMovies,
+  getPopularMovies,
+  getWeekTranding,
+} from '@/services/movieService';
 import BackdropHero from '@/components/movie/backdrop-hero';
-import PopularMovies from './_components/popular-movie';
+import MovieSection from '@/components/movie/movie-section';
 
 export default async function Home() {
-
-  const movies = await getPopularMovies();
   const nowPlayingMovies = await getNowPlayingMovies();
+  const popularMovies = await getPopularMovies();
+  const weekTranding = await getWeekTranding();
 
   return (
     <main className="min-h-screen bg-background">
       <BackdropHero movies={nowPlayingMovies} />
 
-      <PopularMovies movies={movies} />
-
+      <MovieSection movies={popularMovies} title="Popular Movies" />
+      <MovieSection movies={weekTranding} title="Tranding This Week" />
     </main>
   );
 }
